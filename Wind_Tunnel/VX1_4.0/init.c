@@ -1,5 +1,13 @@
 #include "pluto.h"
 
+#define WIND_VELOCITY_KMS  4.0          /* wind speed in km/s        */
+#define WIND_DENSITY_CGS   (1.67e-24)      /* wind density in g/cm³     */
+#define WIND_PRESSURE_CGS  (1.67e-14)      /* wind pressure in dyne/cm² */
+
+/* -- Convert to code units automatically -- */
+#define V_WIND   (WIND_VELOCITY_KMS * 1.0e5 / UNIT_VELOCITY)
+#define RHO_WIND (WIND_DENSITY_CGS / UNIT_DENSITY)
+#define PRS_WIND (WIND_PRESSURE_CGS / (UNIT_DENSITY * UNIT_VELOCITY * UNIT_VELOCITY))
 /* ********************************************************************* */
 void Init (double *us, double x1, double x2, double x3)
 /*
@@ -10,14 +18,13 @@ void Init (double *us, double x1, double x2, double x3)
 {
    
    g_gamma = 1.4;
-
-   us[VX1] = (x1>0.6 && x2<0.2 ? 0.0:4.0);
+   us[VX1] = (x1>0.6 && x2<0.2 ? 0.0 : V_WIND);
    us[VX2] = 0.0;
    us[VX3] = 0.0;
    us[TRC] = 0.0;
 
-   us[RHO] = 1.4;
-   us[PRS] = 1.0;
+   us[RHO] = RHO_WIND;
+   us[PRS] = PRS_WIND;
 
 }
 /* ********************************************************************* */
@@ -96,10 +103,10 @@ void UserDefBoundary (const Data *d, RBox *box, int side, Grid *grid)
 
   if (side == X1_BEG){
     X1_BEG_LOOP(k,j,i){ 
-      d->Vc[RHO][k][j][i] = 1.4;
-      d->Vc[VX1][k][j][i] = 4.0;
+      d->Vc[RHO][k][j][i] = RHO_WIND;
+      d->Vc[VX1][k][j][i] = V_WIND;
       d->Vc[VX2][k][j][i] = 0.0;
-      d->Vc[PRS][k][j][i] = 1.0;
+      d->Vc[PRS][k][j][i] = PRS_WIND;
     }
   } 
 
