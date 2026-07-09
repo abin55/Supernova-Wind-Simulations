@@ -8,7 +8,7 @@ w_dir = "/home/domin/PLUTO/Test_Problems/HD/Wind_Tunnel/"
 # Physical units
 UNIT_DENSITY  = 3.5e-12
 UNIT_LENGTH   = 1.496e13
-UNIT_VELOCITY = 1.0e5        # update this once you check Mstar in pluto.ini
+UNIT_VELOCITY = 1.0e5        
 UNIT_PRESSURE = UNIT_DENSITY * UNIT_VELOCITY**2
 
 # Read valid snapshots from dbl.out
