@@ -1,0 +1,6 @@
+Wind_Tunnel_run/*.dbl
+Wind_Tunnel_run/*.out
+Wind_Tunnel_run/INPUT_DATA/
+Wind_Tunnel_run/cooling.c
+Wind_Tunnel_run/mean_mol_weight.c
+Wind_Tunnel_run/userdef_output.c
