@@ -1,0 +1,19 @@
+# build artifacts
+*.o
+pluto
+makefile
+# PLUTO outputs & descriptors
+data.*.dbl
+data.*.vtk
+data.*.flt
+*.out
+# logs
+*.log
+run_log*.txt
+run_output.log
+nohup.out
+# jupyter
+.ipynb_checkpoints/
+*.ipynb
+# backups
+pluto_original.ini

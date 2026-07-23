@@ -264,9 +264,11 @@ void UserDefBoundary(const Data *d, RBox *box, int side, Grid *grid)
 /*----------------------------------------------------------------------------------------*/  
   /* For constant flow (wind). */
   double UNIT_PRESSURE = UNIT_DENSITY * UNIT_VELOCITY * UNIT_VELOCITY;
-  double rho_blast = 5.74e-21 / UNIT_DENSITY;
-  double vel_blast = 2.87 * (1e8 / UNIT_VELOCITY);
-  double P_blast;
+  double rho_blast = 2.86e-21 / UNIT_DENSITY;
+  double vel_blast = 2.0 * (1e8 / UNIT_VELOCITY);
+  double T_wind = 1e4;
+  double mu_wind = 0.6;
+  double P_blast = rho_blast * T_wind / (KELVIN * mu_wind);
 
   /* For dynamic blastwave. Interpolate the read in file at Init(). */
   // double UNIT_PRESSURE = UNIT_DENSITY * UNIT_VELOCITY * UNIT_VELOCITY;
@@ -277,9 +279,9 @@ void UserDefBoundary(const Data *d, RBox *box, int side, Grid *grid)
   // {
   //   GetBlastwaveAtTime(inj_time_yr, &rho_blast, &P_blast, &vel_blast);
   // }
-  rho_blast *= (3.5e-18 / UNIT_DENSITY); // Input data is in units of 3.5e-18 g cm-3. Converting to 3.5e-12 units.
-  P_blast *= (3.5e-2 / UNIT_PRESSURE);   // Input data is in units of 3.5e-2 dyne cm-2. Converting to code units.
-  vel_blast *= (1e8 / UNIT_VELOCITY);    // Input data is in units of 1e8 cm/s. Converting to code units.
+//  rho_blast *= (3.5e-18 / UNIT_DENSITY); // Input data is in units of 3.5e-18 g cm-3. Converting to 3.5e-12 units.
+  //P_blast *= (3.5e-2 / UNIT_PRESSURE);   // Input data is in units of 3.5e-2 dyne cm-2. Converting to code units.
+  //vel_blast *= (1e8 / UNIT_VELOCITY);    // Input data is in units of 1e8 cm/s. Converting to code units.
 
   // #if DIMENSIONS == 3
   if (side == 0)
